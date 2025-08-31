@@ -5,12 +5,12 @@ function sidebar(){
         <div className="sidebar">
             <h2>Wings Cafe</h2>
             <ul>
-            <li><Link to="/">dashboard</Link></li>
-              <li><Link to="/customer">customer</Link></li>
-              <li><Link to="/sales">sales</Link></li>
-              <li><Link to="/reporting">reporting</Link></li>
+            <li><Link to="/">Home</Link></li>
+              <li><Link to="/sales">Sales</Link></li>
+              <li><Link to="/customer">Customer</Link></li>
               <li><Link to="/product-management">product-management</Link></li>
               <li><Link to="/stock-management">stock-management</Link></li>
+              <li><Link to="/reporting">reporting</Link></li>
             </ul>
         </div>
     );

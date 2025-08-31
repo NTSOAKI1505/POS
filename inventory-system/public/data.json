@@ -1,0 +1,52 @@
+{
+  "products": [
+    {
+      "name": "Coca Cola",
+      "description": "Refreshing soft drink",
+      "category": "Beverage",
+      "price": 15,
+      "quantity": 100
+    },
+    {
+      "name": "Bread",
+      "description": "Freshly baked bread",
+      "category": "Bakery",
+      "price": 10,
+      "quantity": 50
+    }
+  ],
+  "customers": [
+    {
+      "id": 1,
+      "name": "thabo",
+      "email": "thabo@gmail.com",
+      "phone": "123456789",
+      "dateJoined": "2025-08-31"
+    },
+    {
+      "id": 2,
+      "name": "thato",
+      "email": "thato@gmail.com",
+      "phone": "987654321",
+      "dateJoined": "2025-08-31"
+    }
+  ],
+  "sales": [
+    {
+      "id": 1,
+      "customer": "John Doe",
+      "product": "Coca Cola",
+      "quantity": 2,
+      "price": 15,
+      "date": "2025-08-31"
+    },
+    {
+      "id": 2,
+      "customer": "thabo",
+      "product": "Bread",
+      "quantity": 1,
+      "price": 10,
+      "date": "2025-08-31"
+    }
+  ]
+}
