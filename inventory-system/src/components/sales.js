@@ -5,20 +5,21 @@ import { FaPlus } from "react-icons/fa";
 function Sales() {
   const [data, setData] = useState(null);
   const [newSale, setNewSale] = useState({
-    customer: "",
     product: "",
     quantity: 1,
     date: "",
   });
   const [sales, setSales] = useState([]);
 
-  // Load products, customers, and previous sales from JSON
+  // Load products and sales
   useEffect(() => {
     fetch("/data.json")
       .then((res) => res.json())
       .then((json) => {
+        const savedSales =
+          JSON.parse(localStorage.getItem("sales")) || json.sales || [];
         setData(json);
-        setSales(json.sales || []);
+        setSales(savedSales);
       })
       .catch((err) => console.error("Error loading data.json:", err));
   }, []);
@@ -31,19 +32,30 @@ function Sales() {
 
   const handleAddSale = (e) => {
     e.preventDefault();
-    if (!newSale.customer || !newSale.product) return;
+    if (!newSale.product) {
+      alert("Please select a product.");
+      return;
+    }
 
     const product = data.products.find((p) => p.name === newSale.product);
+
+    if (newSale.quantity > product.quantity) {
+      alert("Not enough stock!");
+      return;
+    }
+
     const saleEntry = {
       ...newSale,
+      id: sales.length + 1,
+      date: newSale.date || new Date().toISOString().split("T")[0],
       quantity: Number(newSale.quantity),
       price: product ? product.price : 0,
     };
 
-    // Add sale to state
-    setSales([...sales, saleEntry]);
+    const updatedSales = [...sales, saleEntry];
+    setSales(updatedSales);
+    localStorage.setItem("sales", JSON.stringify(updatedSales));
 
-    // Update product stock
     const updatedProducts = data.products.map((p) =>
       p.name === saleEntry.product
         ? { ...p, quantity: p.quantity - saleEntry.quantity }
@@ -51,32 +63,15 @@ function Sales() {
     );
     setData({ ...data, products: updatedProducts });
 
-    // Reset form
-    setNewSale({ customer: "", product: "", quantity: 1, date: "" });
+    setNewSale({ product: "", quantity: 1, date: "" });
   };
 
   return (
     <div className="sales-page">
-      <h1>Sales Management</h1>
+      <h1>Sales </h1>
 
       {/* Add Sale Form */}
       <form className="add-sale-form" onSubmit={handleAddSale}>
-        {/* Customer dropdown */}
-        <select
-          name="customer"
-          value={newSale.customer}
-          onChange={handleChange}
-          required
-        >
-          <option value="">Select Customer</option>
-          {data.customers.map((c) => (
-            <option key={c.id} value={c.name}>
-              {c.name}
-            </option>
-          ))}
-        </select>
-
-        {/* Product dropdown */}
         <select
           name="product"
           value={newSale.product}
@@ -91,7 +86,6 @@ function Sales() {
           ))}
         </select>
 
-        {/* Show product price */}
         {newSale.product && (
           <p>
             Price per unit:{" "}
@@ -99,7 +93,6 @@ function Sales() {
           </p>
         )}
 
-        {/* Quantity input */}
         <input
           type="number"
           name="quantity"
@@ -107,12 +100,10 @@ function Sales() {
           onChange={handleChange}
           min="1"
           max={
-            data.products.find((p) => p.name === newSale.product)?.quantity ||
-            1
+            data.products.find((p) => p.name === newSale.product)?.quantity || 1
           }
         />
 
-        {/* Sale date */}
         <input
           type="date"
           name="date"
@@ -121,16 +112,14 @@ function Sales() {
         />
 
         <button type="submit" className="add-sale-btn">
-  <FaPlus />
-</button>
-
+          <FaPlus /> Add Sale
+        </button>
       </form>
 
       {/* Sales Table */}
       <table>
         <thead>
           <tr>
-            <th>Customer</th>
             <th>Product</th>
             <th>Qty</th>
             <th>Price/unit</th>
@@ -142,7 +131,6 @@ function Sales() {
           {sales.length > 0 ? (
             sales.map((s, i) => (
               <tr key={i}>
-                <td>{s.customer}</td>
                 <td>{s.product}</td>
                 <td>{s.quantity}</td>
                 <td>{s.price} M</td>
@@ -152,7 +140,7 @@ function Sales() {
             ))
           ) : (
             <tr>
-              <td colSpan="6" style={{ textAlign: "center" }}>
+              <td colSpan="5" style={{ textAlign: "center" }}>
                 No sales recorded
               </td>
             </tr>

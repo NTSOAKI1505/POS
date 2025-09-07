@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { FaPlus, FaTrash } from "react-icons/fa"; // Import icons
+import { FaPlus, FaTrash } from "react-icons/fa"; 
 import "./customer.css";
 
 function Customer() {
@@ -10,7 +10,7 @@ function Customer() {
     email: "",
   });
 
-  // Load customers from localStorage or JSON
+
   useEffect(() => {
     const savedCustomers = JSON.parse(localStorage.getItem("customers"));
     if (savedCustomers && savedCustomers.length > 0) {
@@ -23,7 +23,7 @@ function Customer() {
     }
   }, []);
 
-  // Save to localStorage
+
   useEffect(() => {
     localStorage.setItem("customers", JSON.stringify(customers));
   }, [customers]);
@@ -51,8 +51,6 @@ function Customer() {
   return (
     <div className="customer-page">
       <h1>Customer</h1>
-
-      {/* Add Customer Form */}
       <form className="add-customer-form" onSubmit={handleAddCustomer}>
         <input
           type="text"
@@ -81,7 +79,6 @@ function Customer() {
         </button>
       </form>
 
-      {/* Customer List */}
       <table>
         <thead>
           <tr>

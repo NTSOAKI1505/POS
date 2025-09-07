@@ -47,10 +47,6 @@ function Dashboard() {
 
       <div className="dashboard-cards">
         <div className="card">
-          <h2>Total Customers</h2>
-          <p>{metrics.totalCustomers}</p>
-        </div>
-        <div className="card">
           <h2>Total Products</h2>
           <p>{metrics.totalProducts}</p>
         </div>
@@ -68,7 +64,6 @@ function Dashboard() {
       <table>
         <thead>
           <tr>
-            <th>Customer</th>
             <th>Product</th>
             <th>Qty</th>
             <th>Price/unit</th>
@@ -79,7 +74,6 @@ function Dashboard() {
         <tbody>
           {data.sales.slice(-5).map((sale) => (
             <tr key={sale.id}>
-              <td>{sale.customer}</td>
               <td>{sale.product}</td>
               <td>{sale.quantity}</td>
               <td>M {sale.price}</td>

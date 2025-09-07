@@ -5,13 +5,11 @@ import "./reporting.css";
 function Reporting() {
   const [data, setData] = useState({
     products: [],
-    customers: [],
     sales: [],
   });
 
   const [totals, setTotals] = useState({
     totalSalesAmount: 0,
-    totalCustomers: 0,
     totalProductsSold: 0,
   });
 
@@ -27,13 +25,12 @@ function Reporting() {
           (sum, sale) => sum + sale.price * sale.quantity,
           0
         );
-        const totalCustomers = json.customers.length;
         const totalProductsSold = json.sales.reduce(
           (sum, sale) => sum + sale.quantity,
           0
         );
 
-        setTotals({ totalSalesAmount, totalCustomers, totalProductsSold });
+        setTotals({ totalSalesAmount, totalProductsSold });
       })
       .catch((err) => console.error("Failed to load data:", err));
   }, []);
@@ -44,7 +41,6 @@ function Reporting() {
 
       {/* Summary */}
       <div className="report-summary">
-        <p><strong>Total Customers:</strong> {totals.totalCustomers}</p>
         <p><strong>Total Products Sold:</strong> {totals.totalProductsSold}</p>
         <p><strong>Total Sales Amount:</strong> M {totals.totalSalesAmount}</p>
       </div>
@@ -54,7 +50,6 @@ function Reporting() {
       <table>
         <thead>
           <tr>
-            <th>Customer</th>
             <th>Product</th>
             <th>Quantity</th>
             <th>Price/unit</th>
@@ -66,7 +61,6 @@ function Reporting() {
           {data.sales.length > 0 ? (
             data.sales.map((sale) => (
               <tr key={sale.id}>
-                <td>{sale.customer}</td>
                 <td>{sale.product}</td>
                 <td>{sale.quantity}</td>
                 <td>M {sale.price}</td>
