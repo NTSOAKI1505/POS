@@ -4,14 +4,8 @@ import "./stock-management.css";
 
 function StockManagement() {
   const [products, setProducts] = useState([
-    { id: 1, name: "Coke", quantity: 30 },
-    { id: 2, name: "Yogurt", quantity: 25 },
-    { id: 3, name: "Chinese Food", quantity: 20 },
-    { id: 4, name: "Coffee", quantity: 40 },
-    { id: 5, name: "Energy Drinks", quantity: 35 },
-    { id: 6, name: "Wingsflavor", quantity: 18 },
-    { id: 7, name: "Zimbasnacks", quantity: 24 },
-    { id: 8, name: "Chips", quantity: 10 }
+    { id: 1, name: "Coca Cola", quantity: 100 },
+    { id: 2, name: "Bread", quantity: 50 },
   ]);
 
   const [selectedProduct, setSelectedProduct] = useState("");

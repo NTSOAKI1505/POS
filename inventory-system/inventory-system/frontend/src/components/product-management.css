@@ -86,7 +86,7 @@ tr:nth-child(even) {
 }
 
 .delete-btn {
-  background-color: blue;
+  background-color: #dc3545;
   color: white;
 }
 

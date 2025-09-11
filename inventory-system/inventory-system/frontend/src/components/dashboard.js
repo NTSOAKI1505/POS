@@ -7,7 +7,7 @@ import yogurt from "./assets/yogurt.jpg";
 import noodles from "./assets/noodles.jpg";
 import coffee from "./assets/coffee.jpg";
 import energydrink from "./assets/energy-drink.jpg";
-import Wingsflavor from "./assets/wingsflavor.jpg";
+import Wings from "./assets/wings.jpg";
 import Zimbasnacks from "./assets/zimbasnacks.jpg";
 import Chips from "./assets/chips.jpg";
 
@@ -26,12 +26,12 @@ function Dashboard() {
     } else {
       // default products if localStorage empty
       const defaultProducts = [
-        { id: 1, name: "Coke", price: 26, quantity: 40, image: coke },
+        { id: 1, name: "Coke", price: 26, quantity: 30, image: coke },
         { id: 2, name: "Yogurt", price: 10, quantity: 25, image: yogurt },
         { id: 3, name: "Chinese Food", price: 50, quantity: 20, image: noodles },
         { id: 4, name: "Coffee", price: 12, quantity: 40, image: coffee },
         { id: 5, name: "Energy Drinks", price: 25, quantity: 35, image: energydrink },
-        { id: 6, name: "wingsflavor", price: 45, quantity: 18, image: Wingsflavor },
+        { id: 6, name: "Wings", price: 45, quantity: 18, image: Wings },
         { id: 7, name: "Zimbasnacks", price: 22, quantity: 24, image: Zimbasnacks },
         { id: 8, name: "Chips", price: 25, quantity: 10, image: Chips },
       ];
@@ -64,10 +64,10 @@ function Dashboard() {
       case "Chinese Food": return noodles;
       case "Coffee": return coffee;
       case "Energy Drinks": return energydrink;
-      case "Wingsflavor": return Wingsflavor;
+      case "Wings": return Wings;
       case "Zimbasnacks": return Zimbasnacks;
       case "Chips": return Chips;
-      default: return Wingsflavor
+      default: return coke;
     }
   };
 

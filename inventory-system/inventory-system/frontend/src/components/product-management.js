@@ -1,19 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaPlus, FaEdit, FaTrash } from "react-icons/fa";
 import "./product-management.css";
 
 function ProductManagement() {
-  const [products, setProducts] = useState([
-    { id: 1, name: "Coke", price: 26, cost: 20, quantity: 30, image: "/assets/coke.jpg" },
-    { id: 2, name: "Yogurt", price: 10, cost: 6, quantity: 25, image: "/assets/yogurt.jpg" },
-    { id: 3, name: "Chinese Food", price: 50, cost: 30, quantity: 20, image: "/assets/noodles.jpg" },
-    { id: 4, name: "Coffee", price: 12, cost: 7, quantity: 40, image: "/assets/coffee.jpg" },
-    { id: 5, name: "Energy Drinks", price: 25, cost: 15, quantity: 35, image: "/assets/energy-drink.jpg" },
-    { id: 6, name: "Wingsflavor", price: 45, cost: 25, quantity: 18, image: "/assets/wingsflavor.jpg" },
-    { id: 7, name: "Zimbasnacks", price: 22, cost: 12, quantity: 24, image: "/assets/zimbasnacks.jpg" },
-    { id: 8, name: "Chips", price: 25, cost: 14, quantity: 10, image: "/assets/chips.jpg" }
-  ]);
-
+  const [products, setProducts] = useState([]);
   const [newProduct, setNewProduct] = useState({
     name: "",
     description: "",
@@ -21,10 +11,18 @@ function ProductManagement() {
     price: "",
     quantity: "",
   });
-
   const [editingIndex, setEditingIndex] = useState(null);
 
   const categories = ["Beverage", "Bakery", "Snacks", "Dairy", "Produce"];
+
+  useEffect(() => {
+    fetch("/data.json")
+      .then((res) => res.json())
+      .then((json) => {
+        if (json.products) setProducts(json.products);
+      })
+      .catch((err) => console.error("Error loading products:", err));
+  }, []);
 
   const handleChange = (e) => {
     setNewProduct({ ...newProduct, [e.target.name]: e.target.value });

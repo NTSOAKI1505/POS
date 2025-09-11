@@ -1,0 +1,49 @@
+/* Sidebar container */
+.sidebar {
+  width: 220px;              
+  height: calc(100vh - 60px); 
+  background: #2c3e50;
+  color: white;
+  padding: 20px 10px;
+  position: fixed;
+  top: 60px;                 
+  left: 0;
+  overflow-y: auto;          
+  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+  z-index: 999;              
+}
+
+/* Sidebar menu list */
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Sidebar menu items */
+.sidebar ul li {
+  margin: 15px 0;
+}
+
+/* Sidebar links */
+.sidebar ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  display: block;
+  padding: 10px 15px;
+  border-radius: 8px;
+
+}
+
+/* Hover effect */
+.sidebar ul li a:hover {
+  background: #557548;
+  color: #fff;
+}
+
+/* Active link styling (optional) */
+.sidebar ul li a.active {
+  background: #0077ff;
+  color: white;
+}

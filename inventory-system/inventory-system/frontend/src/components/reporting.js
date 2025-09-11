@@ -1,38 +1,33 @@
 import "./reporting.css";
+// Use default import since useData.js uses export default
 import useData from "./useData";
 
 function Reports() {
   const { products, sales } = useData();
 
-  // Calculate total capital (cost of stock)
+  // Calculate capital used (total cost of all products in stock)
   const totalCapital = products.reduce(
     (sum, product) => sum + product.cost * product.quantity,
     0
   );
 
-  // Product summary (affected by sales)
+  // Calculate sales summary per product
   const productSummary = products.map((product) => {
     const soldItems = sales.filter((s) => s.product === product.name);
     const totalSold = soldItems.reduce((sum, s) => sum + s.quantity, 0);
-    const totalRevenue = soldItems.reduce(
-      (sum, s) => sum + s.price * s.quantity,
-      0
-    );
+    const totalRevenue = soldItems.reduce((sum, s) => sum + s.price * s.quantity, 0);
     const totalProfit = soldItems.reduce((sum, s) => sum + s.profit, 0);
 
     return {
       name: product.name,
       price: product.price,
       cost: product.cost,
-      stock: product.quantity,
+      quantity: product.quantity,
       sold: totalSold,
       revenue: totalRevenue,
       profit: totalProfit,
     };
   });
-
-  // Find most sold product(s)
-  const mostSold = [...productSummary].sort((a, b) => b.sold - a.sold)[0];
 
   return (
     <div className="reports-page">
@@ -46,7 +41,6 @@ function Reports() {
             <th>Price/unit</th>
             <th>Cost/unit</th>
             <th>Sold Qty</th>
-            <th>Revenue</th>
             <th>Profit</th>
             <th>Remaining Stock</th>
           </tr>
@@ -58,25 +52,15 @@ function Reports() {
               <td>M {p.price}</td>
               <td>M {p.cost}</td>
               <td>{p.sold}</td>
-              <td>M {p.revenue}</td>
               <td style={{ color: "green" }}>M {p.profit}</td>
-              <td>{p.stock}</td>
+              <td>{p.quantity}</td>
             </tr>
           ))}
         </tbody>
       </table>
 
-      <h2>TOTAL CAPITAL USED</h2>
+      <h2>Total Capital Used</h2>
       <p>M {totalCapital}</p>
-
-      {mostSold && (
-        <div className="highlight">
-          <h2>BEST S0LD</h2>
-          <p>
-            {mostSold.name} — Sold {mostSold.sold} units
-          </p>
-        </div>
-      )}
     </div>
   );
 }

@@ -13,7 +13,6 @@ import Productmanagement from "./components/product-management";
 import Footer from "./components/footer";
 import Sidebar from "./components/sidebar";
 
-
 const API_URL = "http://localhost:5000"; // Change to your remote API if needed
 
 function App() {

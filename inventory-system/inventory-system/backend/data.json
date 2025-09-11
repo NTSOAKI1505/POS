@@ -6,7 +6,7 @@
       "description": "Refreshing soft drink",
       "category": "Beverage",
       "price": 26,
-      "quantity": 40,
+      "quantity": 30,
       "image": "/assets/coke.jpg"
     },
     {
@@ -52,7 +52,7 @@
       "category": "Food",
       "price": 45,
       "quantity": 18,
-      "image": "/assets/wingsflavor.jpg"
+      "image": "/assets/wings.jpg"
     },
     {
       "id": 7,
