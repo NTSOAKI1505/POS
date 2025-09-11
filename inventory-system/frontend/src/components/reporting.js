@@ -1,5 +1,6 @@
 import "./reporting.css";
-import { useData } from "./useData";
+// Use default import since useData.js uses export default
+import useData from "./useData";
 
 function Reports() {
   const { products, sales } = useData();
